@@ -66,11 +66,15 @@ class BananaWorld(DirectObject):
                     model.setScale(item.scale)
                     model.reparentTo(render)
 
-        b=OnscreenImage(image="models/pics/Mount_Rainier_6874h.jpg")
-        b.parent = base.cam
-        b.scale = (640, 0, 360)
-        b.pos = (20, 20, 10)
-        base.cam.node().getDisplayRegion(0).setSort(20)
+        sky = base.loader.loadModel('models/sky.egg')
+        sky.setPos(0, 0, -10)
+        sky.reparentTo(render)
+        sky.setHpr(0, 270, 0)
+        #b=OnscreenImage(image="models/pics/Mount_Rainier_6874h.jpg")
+        #b.parent = base.cam
+        #b.scale = (640, 0, 360)
+        #b.pos = (20, 20, 10)
+        #base.cam.node().getDisplayRegion(0).setSort(20)
         #imageObject = OnscreenImage(image = 'models/pics/Mount_Rainier_6874h.jpg', pos = (-0.5, 0, 0.02))
         #imageObject.parent = camera
         # A dictionary of what keys are curently being pressed
