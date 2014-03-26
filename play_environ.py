@@ -1,13 +1,14 @@
 from direct.showbase.ShowBase import ShowBase
 from direct.showbase.DirectObject import DirectObject
 from panda3d.core import PerspectiveLens, Point3
-from math import pi, sin, cos
-from direct.task import Task
+from panda3d.core import WindowProperties
+#from math import pi, sin, cos
+#from direct.task import Task
 import sys
 sys.path.insert(1, '../goBananas')
 from load_models import load_models
 from environment import PlaceModels
-from direct.gui.OnscreenImage import OnscreenImage
+#from direct.gui.OnscreenImage import OnscreenImage
 
 
 # Constants
@@ -33,6 +34,9 @@ class BananaWorld(DirectObject):
         # Things that can affect camera:
         # options resolution resW resH
         base = ShowBase()
+        wp = WindowProperties()
+        wp.setFullscreen(True)
+        base.win.requestProperties(wp)
         lens = PerspectiveLens()
         # Fov is set in config for 60
         lens.setFov(60)
@@ -40,7 +44,8 @@ class BananaWorld(DirectObject):
         # this was for 800x600
         # field of view 60 46.8264...
         # aspect ratio 1.3333
-        lens.setAspectRatio(800.0 / 600.0)
+        #lens.setAspectRatio(800.0 / 600.0)
+        lens.setAspectRatio(1024.0 / 768.0)
         base.cam.node().setLens(lens)
         print lens.getFov()
         print lens.getAspectRatio()
@@ -58,18 +63,37 @@ class BananaWorld(DirectObject):
         # load environment
         load_models()
         for item in PlaceModels._registry:
-            if item.group == 'original':
-                if item.name is not 'sky':
-                    item.model = path_to_models + item.model
-                    model = base.loader.loadModel(item.model)
-                    model.setPos(item.location)
-                    model.setScale(item.scale)
-                    model.reparentTo(render)
+            if 'original' in item.group:
+            #if 'better' in item.group:
+                item.model = path_to_models + item.model
+                model = base.loader.loadModel(item.model)
+                model.setPos(item.location)
+                model.setScale(item.scale)
+                model.reparentTo(render)
+                #if item.name is not 'sky':
+                #if item.name is not 'sky' and item.name is not 'terrain':
+                    #item.model = path_to_models + item.model
+                    #model = base.loader.loadModel(item.model)
+                    #model.setPos(item.location)
+                    #model.setScale(item.scale)
+                    #model.reparentTo(render)
 
-        sky = base.loader.loadModel('models/sky.egg')
-        sky.setPos(0, 0, -10)
-        sky.reparentTo(render)
-        sky.setHpr(0, 270, 0)
+        #sky = base.loader.loadModel('models/sky.egg')
+        #sky = base.loader.loadModel('models/good_sky_hole.egg')
+        #scale = 6  # 6 gets you just outside the walls. The further
+        # back you go after that the more it cuts off, opposite of
+        # what I had assumed
+        #sky.setPos(0, 0, 0)
+        #sky.setPos(-5.89054 * scale, 3.23145 * scale, -0.8 * scale)
+        # z = 0 is too high. weird. -0.8 seems about even
+
+        #sky.setScale(scale)
+        #sky.reparentTo(render)
+        #sky.setHpr(0, 0, 0)
+        #terrain = base.loader.loadModel('models/courtyard_one.egg')
+        #terrain.setPos(0, 0, 0.5)
+        #terrain.setScale(2.5)
+        #terrain.reparentTo(render)
         #b=OnscreenImage(image="models/pics/Mount_Rainier_6874h.jpg")
         #b.parent = base.cam
         #b.scale = (640, 0, 360)
