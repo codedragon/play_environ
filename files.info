@@ -1,0 +1,20 @@
+if given a photo with 2048 or more resolution in one dimension, 
+definitely better to save at 2048, for more resolution.
+
+sky needs to be low, so if you get close to the wall you can't see where
+it is missing, -1 seems probably okay. Making wall higher, need to anyway.
+
+with walls low, bananas are really high
+
+take out less panels of sky, just 3 rings instead of 4, leave 5
+
+sky egg is looking great, and can switch in other skies easily
+
+beach_panoramic - water, duh. not bad, actually
+factory_panoramic - good one. some water, but makes sense
+pano_houses - not bad. 
+pano_lighthouse - can see the seam, weird being on the beach, very similar to 
+           beach, but not as good.
+pano_observatory - keeper
+pano_salt_lake - meh
+pano_water_bldg - in the middle of a canal, weird, but kind of cool
